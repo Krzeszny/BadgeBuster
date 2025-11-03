@@ -1,0 +1,42 @@
+# This file is used by the Thunderstore CLI to build and publish your mod to Thunderstore. https://github.com/thunderstore-io/thunderstore-cli
+
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "art0007i"
+name = "BadgeRemover"
+description = "Makes it so default badges don't get generated in your sessions. It also makes it so when you have default nameplates enabled, they will not have badges."
+websiteUrl = "https://github.com/art0007i/BadgeRemover"
+containsNsfwContent = false
+
+[package.dependencies]
+ResoniteModding-BepisLoader = "1.4.1"
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./build"
+
+[[build.copy]]
+source = "./Plugin/bin/Release/BadgeRemover.dll"
+target = "plugins/BadgeRemover/"
+
+[[build.copy]]
+source = "./Plugin/bin/Release/BadgeRemover.pdb"
+target = "plugins/BadgeRemover/"
+
+[[build.copy]]
+source = "./CHANGELOG.md"
+target = "/"
+
+[[build.copy]]
+source = "./LICENSE"
+target = "/"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["resonite"]
+
+[publish.categories]
+resonite = [ "mods", "visualtweaks" ]
