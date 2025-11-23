@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <Authors>Dandrid</Authors>
+    <TargetFramework>net9.0</TargetFramework>
+    <RepositoryUrl>https://github.com/Krzeszny/BadgeBuster</RepositoryUrl>
+    <Product>BadgeBuster</Product>
+    <RootNamespace>BadgeBuster</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Deterministic>true</Deterministic>
+    <CopyToMods Condition="'$(CopyToMods)'==''">true</CopyToMods>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ResonitePath Condition="'$(ResonitePath)' != ''">$(ResonitePath)/</ResonitePath>
+    <ResonitePath Condition="Exists('$(MSBuildProgramFiles32)\Steam\steamapps\common\Resonite\')">$(MSBuildProgramFiles32)\Steam\steamapps\common\Resonite\</ResonitePath>
+    <ResonitePath Condition="Exists('$(HOME)/.steam/steam/steamapps/common/Resonite/')">$(HOME)/.steam/steam/steamapps/common/Resonite/</ResonitePath>
+  </PropertyGroup>
+
+  <!-- Local game references -->
+  <ItemGroup Condition="Exists('$(ResonitePath)')">
+    <Reference Include="HarmonyLib">
+      <HintPath>$(ResonitePath)rml_libs/0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ResoniteModLoader">
+      <HintPath>$(ResonitePath)Libraries/ResoniteModLoader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FrooxEngine">
+      <HintPath>$(ResonitePath)FrooxEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Elements.Core">
+      <HintPath>$(ResonitePath)Elements.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Renderite.Shared">
+       <HintPath>$(ResonitePath)Renderite.Shared.dll</HintPath>
+       <Private>False</Private>
+     </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(CopyToMods)'=='true'">
+   <Message Text="Attempting to copy $(TargetFileName) to $(ResonitePath)rml_mods" Importance="high" />
+   <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(ResonitePath)rml_mods" ContinueOnError="true" />
+  </Target>
+
+</Project>
