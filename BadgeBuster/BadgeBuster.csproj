@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <Authors>Dandrid</Authors>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RepositoryUrl>https://github.com/Krzeszny/BadgeBuster</RepositoryUrl>
     <Product>BadgeBuster</Product>
     <RootNamespace>BadgeBuster</RootNamespace>
